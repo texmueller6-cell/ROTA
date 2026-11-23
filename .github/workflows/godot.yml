@@ -85,6 +85,10 @@ jobs:
 
       - name: Export Android APK
         run: |
+          sed -i 's|^gradle_build/use_custom_build=.*|gradle_build/use_custom_build=false|' export_presets.cfg
+          sed -i 's|^keystore/release=.*|keystore/release=""|' export_presets.cfg
+          sed -i 's|^keystore/release_user=.*|keystore/release_user=""|' export_presets.cfg
+          sed -i 's|^keystore/release_password=.*|keystore/release_password=""|' export_presets.cfg
           export/godot --no-window --path=. --export-debug "Android" export/${EXPORT_NAME}.apk
 
       - name: Upload Android artifact
